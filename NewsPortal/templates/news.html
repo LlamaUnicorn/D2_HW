@@ -8,6 +8,26 @@ News
 
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
-<h1>Все новости</h1>
-{{ news }}
+    <h1>Все новости</h1>
+    <hr>
+    {% if news %}
+        <table>
+            <tr>
+                <td>Заголовок</td>
+                <td>Дата публикации</td>
+                <td>Предпросмотр</td>
+            </tr>
+
+            {% for singular_news in news %}
+            <tr>
+                <td>{{ singular_news.title }}</td>
+                <td>{{ singular_news.dateCreation }}</td>
+                <td>{{ singular_news.text|truncatechars:20 }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
 {% endblock content %}
