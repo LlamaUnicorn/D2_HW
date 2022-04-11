@@ -3,10 +3,13 @@
 
 <!-- Название у нас будет Product -->
 {% block title %}
-{{ singular_news }}
+singular_news
+singular_news
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
 <h1>{{ singular_news }}</h1>
+{{ singular_news.dateCreation|date:'d.m.Y' }}
+<p>{{ singular_news.text }}</p>
 {% endblock content %}

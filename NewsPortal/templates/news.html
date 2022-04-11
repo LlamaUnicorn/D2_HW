@@ -1,6 +1,8 @@
 <!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
 
+{% load custom_filters %}
+
 <!-- Название у нас будет products -->
 {% block title %}
 News
@@ -9,6 +11,8 @@ News
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
     <h1>Все новости</h1>
+    <h3>{{ time_now|date:'d M Y' }}</h3>
+    <h4>Опубликовано новостей: {{ news|length }}</h4>
     <hr>
     {% if news %}
         <table>
@@ -20,9 +24,10 @@ News
 
             {% for singular_news in news %}
             <tr>
-                <td>{{ singular_news.title }}</td>
-                <td>{{ singular_news.dateCreation }}</td>
+                <td>{{ singular_news }}</td>
+                <td>{{ singular_news.dateCreation|date:'d M Y' }}</td>
                 <td>{{ singular_news.text|truncatechars:20 }}</td>
+                <td>{{ singular_news.title|censor }}</td>
             </tr>
             {% endfor %}
 
