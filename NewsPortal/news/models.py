@@ -23,9 +23,12 @@ class Author(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Автор')
 
     NEWS = 'NW'
     ARTICLE = 'AR'
@@ -33,12 +36,12 @@ class Post(models.Model):
         (NEWS, 'Новость'),
         (ARTICLE, 'Статья'),
     )
-    categoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
+    categoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE, verbose_name='Категория')
     dateCreation = models.DateTimeField(auto_now_add=True)
     postCategory = models.ManyToManyField(Category, through='PostCategory')
-    title = models.CharField(max_length=128)
-    text = models.TextField()
-    rating = models.SmallIntegerField(default=0)
+    title = models.CharField(max_length=128, unique=True, verbose_name='Название')
+    text = models.TextField(verbose_name='Текст')
+    rating = models.SmallIntegerField(default=0, verbose_name='Рейтинг')
 
     def like(self):
         self.rating += 1
@@ -50,6 +53,9 @@ class Post(models.Model):
 
     def preview(self):
         return '{} ... {}'.format(self.text[0:123], str(self.rating))
+
+    def __str__(self):
+        return self.title
 
 
 class PostCategory(models.Model):
