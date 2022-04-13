@@ -5,8 +5,11 @@ register = template.Library()
 
 @register.filter()
 def censor(value):
-    profanity = ['соня', 'дом', 'редиска']
-    for i in profanity:
-        if i.find(value):
-            value = value.replace(i[1::], "*" * (len(i)-1))
-    return f'{value}'
+    profanity = ['редиска', 'новости']
+    try:
+        for word in profanity:
+            if word.find(value):
+                value = value.replace(word[1::], "*" * (len(word)-1))
+        return f'{value}'
+    except TypeError as e:
+        print(f'Фильтр применяется только к строкам: {e}')

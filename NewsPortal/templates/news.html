@@ -1,14 +1,11 @@
-<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
 
 {% load custom_filters %}
 
-<!-- Название у нас будет products -->
 {% block title %}
 News
 {% endblock title %}
 
-<!-- В контенте на странице мы выводим все товары -->
 {% block content %}
     <h1>Все новости</h1>
     <h3>{{ time_now|date:'d M Y' }}</h3>
@@ -29,7 +26,6 @@ News
                 <td>{{ singular_news.text|censor|truncatechars:20 }}</td>
             </tr>
             {% endfor %}
-
         </table>
     {% else %}
         <h2>Новостей нет!</h2>
