@@ -1,4 +1,4 @@
-from django_filters import FilterSet #, DateFilter
+from django_filters import FilterSet, DateFilter
 from .models import Post
 
 
@@ -8,6 +8,15 @@ from .models import Post
 
 
 class PostFilter(FilterSet):
+        # time_in = DateFilter(
+        #     lookup_expr='gt',
+        #     widget=django.forms.DateInput(
+        #         attrs={
+        #             'type': 'date'
+        #         }
+        #     )
+        # )
+
     class Meta:
         # В Meta классе мы должны указать Django модель,
         # в которой будем фильтровать записи.

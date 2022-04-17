@@ -1,8 +1,15 @@
 from django.shortcuts import render
 from datetime import datetime
-from django.views.generic import ListView, DetailView
+
+
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
+
 from .models import Post
 from .filters import PostFilter
+from .forms import PostForm
 
 # Create your views here.
 
@@ -38,3 +45,23 @@ class NewsDetail(DetailView):
     template_name = 'singular_news.html'
     context_object_name = 'singular_news'
 
+
+class NewsCreate(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = PostForm
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'news_edit.html'
+
+
+class NewsUpdate(UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = 'news_edit.html'
+
+
+class NewsDelete(DeleteView):
+    model = Post
+    template_name = 'news_delete.html'
+    success_url = reverse_lazy('news_list')
