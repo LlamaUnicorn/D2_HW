@@ -65,3 +65,10 @@ class NewsDelete(DeleteView):
     model = Post
     template_name = 'news_delete.html'
     success_url = reverse_lazy('news_list')
+
+
+class NewsSearch(NewsList):
+    form_class = PostForm
+    model = Post
+    template_name = 'news_search.html'
+    success_url = reverse_lazy('news_search')

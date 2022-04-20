@@ -49,6 +49,6 @@ class PostFilter(FilterSet):
         fields = {
             # поиск по названию
             'title': ['icontains'],
-            'dateCreation': ['lt', 'gt'],
+            # 'dateCreation': ['lt', 'gt'],
             'postCategory': ['exact'],
         }
