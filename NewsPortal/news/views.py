@@ -54,6 +54,11 @@ class NewsCreate(CreateView):
     # и новый шаблон, в котором используется форма.
     template_name = 'news_edit.html'
 
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.categoryType = 'NW'
+        return super().form_valid(form)
+
 
 class NewsUpdate(UpdateView):
     form_class = PostForm

@@ -32,6 +32,7 @@ News
                 <td><h5>Заголовок</h5></td>
                 <td><h5>Дата публикации</h5></td>
                 <td><h5>Предпросмотр</h5></td>
+                <td><h5>Новость/статья</h5></td>
             </tr>
 
             {% for singular_news in news %}
@@ -39,6 +40,7 @@ News
                 <td>{{ singular_news.title|censor }}</td>
                 <td>{{ singular_news.dateCreation|date:'d M Y' }}</td>
                 <td>{{ singular_news.text|censor|truncatechars:20 }}</td>
+                <td>{{ singular_news.categoryType }}</td>
             </tr>
             {% endfor %}
         </table>

@@ -51,4 +51,5 @@ class PostFilter(FilterSet):
             'title': ['icontains'],
             # 'dateCreation': ['lt', 'gt'],
             'postCategory': ['exact'],
+            'categoryType': ['exact']
         }
