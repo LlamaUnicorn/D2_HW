@@ -49,6 +49,7 @@ class PostFilter(FilterSet):
         fields = {
             # поиск по названию
             'title': ['icontains'],
+            'author': ['exact'],
             # 'dateCreation': ['lt', 'gt'],
             'postCategory': ['exact'],
             'categoryType': ['exact']

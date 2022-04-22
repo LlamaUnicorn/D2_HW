@@ -59,6 +59,16 @@ class NewsCreate(CreateView):
         post.categoryType = 'NW'
         return super().form_valid(form)
 
+    # def post(self, request, *args, **kwargs):
+    #     id = request.id
+    #     user = User.objects.get(id=request.user.id)
+    #     author = Author.objects.get(user=user)
+    #
+    #     if form.is_valid():
+    #         post = form.save(commit=False)
+    #         post.author = author
+    #         post.save()
+
 
 class NewsUpdate(UpdateView):
     form_class = PostForm
