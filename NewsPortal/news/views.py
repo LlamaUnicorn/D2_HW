@@ -54,20 +54,24 @@ class NewsCreate(CreateView):
     # и новый шаблон, в котором используется форма.
     template_name = 'news_edit.html'
 
+    # def form_valid(self, form):
+    #     post = form.save(commit=False)
+    #     post.categoryType = 'NW'
+    #     return super().form_valid(form)
+
+
+class ArticleCreate(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = PostForm
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'article_edit.html'
+
     def form_valid(self, form):
         post = form.save(commit=False)
-        post.categoryType = 'NW'
+        post.categoryType = 'AR'
         return super().form_valid(form)
-
-    # def post(self, request, *args, **kwargs):
-    #     id = request.id
-    #     user = User.objects.get(id=request.user.id)
-    #     author = Author.objects.get(user=user)
-    #
-    #     if form.is_valid():
-    #         post = form.save(commit=False)
-    #         post.author = author
-    #         post.save()
 
 
 class NewsUpdate(UpdateView):
