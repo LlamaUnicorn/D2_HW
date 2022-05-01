@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (
-    NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete, NewsSearch, ArticleCreate,
+    NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete, NewsSearch,
 )
 
 urlpatterns = [

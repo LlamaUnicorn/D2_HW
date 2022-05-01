@@ -7,7 +7,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import TemplateView
 
 
@@ -50,38 +50,40 @@ class NewsDetail(DetailView):
     context_object_name = 'singular_news'
 
 
-class NewsCreate(CreateView):
+class NewsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
     model = Post
     # и новый шаблон, в котором используется форма.
     template_name = 'news_edit.html'
+    permission_required = ('news.add_post', )
 
     # def form_valid(self, form):
     #     post = form.save(commit=False)
     #     post.categoryType = 'NW'
     #     return super().form_valid(form)
 
+#
+# class ArticleCreate(CreateView):
+#     # Указываем нашу разработанную форму
+#     form_class = PostForm
+#     # модель товаров
+#     model = Post
+#     # и новый шаблон, в котором используется форма.
+#     template_name = 'article_edit.html'
+#
+#     def form_valid(self, form):
+#         post = form.save(commit=False)
+#         post.categoryType = 'AR'
+#         return super().form_valid(form)
 
-class ArticleCreate(CreateView):
-    # Указываем нашу разработанную форму
-    form_class = PostForm
-    # модель товаров
-    model = Post
-    # и новый шаблон, в котором используется форма.
-    template_name = 'article_edit.html'
 
-    def form_valid(self, form):
-        post = form.save(commit=False)
-        post.categoryType = 'AR'
-        return super().form_valid(form)
-
-
-class NewsUpdate(UpdateView):
+class NewsUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
+    permission_required = ('news.change_post', )
 
 
 class NewsDelete(DeleteView):
