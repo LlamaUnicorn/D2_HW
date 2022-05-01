@@ -7,6 +7,10 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+
+
 from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
@@ -91,3 +95,7 @@ class NewsSearch(NewsList):
     model = Post
     template_name = 'news_search.html'
     success_url = reverse_lazy('news_search')
+
+
+class ProtectedView(LoginRequiredMixin, TemplateView):
+    template_name = 'protect/index.html'
