@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from datetime import datetime
 
 
@@ -9,9 +10,10 @@ from django.views.generic import (
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 
 
-from .models import Post
+from .models import Post, Category
 from .filters import PostFilter
 from .forms import PostForm
 
@@ -101,3 +103,35 @@ class NewsSearch(NewsList):
 
 class ProtectedView(LoginRequiredMixin, TemplateView):
     template_name = 'protect/index.html'
+
+
+class CategoryList(ListView):
+    model = Category  # указываем модель, объекты которой мы будем выводить
+    template_name = 'category.html'  # указываем имя шаблона, в котором будет лежать html, в котором будут все инструкции о том, как именно пользователю должны вывестись наши объекты
+    context_object_name = 'categorys'  # это имя списка, в котором будут лежать все объекты, его надо указать, чтобы обратиться к самому списку объектов через html-шаблон
+    paginate_by = 5
+
+
+@login_required
+def subscribe_me(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    if category not in user.category_set.all():
+        category.subscribers.add(user)
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def unsubscribe_me(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    if category in user.category_set.all():
+        category.subscribers.remove(user)
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))
+
+
+
