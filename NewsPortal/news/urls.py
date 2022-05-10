@@ -17,5 +17,9 @@ urlpatterns = [
     path('category/subscribe/<int:pk>', subscribe_me),
     path('category/unsubscribe/<int:pk>', unsubscribe_me),
     # path('create2/', ArticleCreate.as_view(), name='article_create')
+    path('subscribe/<int:pk>', subscribe_me),
+    path('unsubscribe/<int:pk>', unsubscribe_me),
+    path('category/subscribe/<int:pk>', subscribe_me),
+    path('category/unsubscribe/<int:pk>', unsubscribe_me),
 ]
 
