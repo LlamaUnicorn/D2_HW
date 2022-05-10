@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.shortcuts import redirect
 from datetime import datetime
 
-
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -122,7 +121,6 @@ def subscribe_me(request, pk):
     else:
         return redirect(request.META.get('HTTP_REFERER'))
 
-
 @login_required
 def unsubscribe_me(request, pk):
     user = request.user
@@ -132,6 +130,3 @@ def unsubscribe_me(request, pk):
         return redirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect(request.META.get('HTTP_REFERER'))
-
-
-
